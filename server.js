@@ -80,7 +80,7 @@ app.get("/locations/:id/comments/new", function(req, res) {
 
 app.post("/locations/:id/comments", function(req, res) {
   //lookup campground using ID
-  Locations.findById(req.params.id, function(err, location) {
+  Location.findById(req.params.id, function(err, location) {
     if (err) {
       console.log(err);
       res.redirect("/locations");
@@ -91,7 +91,7 @@ app.post("/locations/:id/comments", function(req, res) {
         } else {
           location.comments.push(comment);
           location.save();
-          res.redirect("/locations/" + locations._id);
+          res.redirect("/locations/" + location._id);
         }
       });
     }
