@@ -1,4 +1,4 @@
-<%- include ("./partials/header") %>
+<%- include ("../partials/header") %>
 
 <div class="container">
   <header class="jumbotron">
@@ -14,7 +14,7 @@
   </header>
 
   <div class="row text-center" style="display:flex; flex-wrap: wrap;">
-    <% locations.forEach(function(Location){ %>
+    <% locations.forEach(function(location){ %>
     <div class="col-md-3 col-sm-6">
       <div class="thumbnail">
         <img src="<%= location.image %>" />
@@ -22,7 +22,7 @@
           <h4><%= location.name %></h4>
         </div>
         <p>
-          <a href="/location/<%= location._id %>" class="btn btn-primary"
+          <a href="/locations/<%= location._id %>" class="btn btn-primary"
             >More Info</a
           >
         </p>
@@ -31,4 +31,4 @@
     <% }); %>
   </div>
 </div>
-<%- include ("./partials/footer") %>
+<%- include ("../partials/footer") %>

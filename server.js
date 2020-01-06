@@ -1,20 +1,16 @@
-const express = require("express");
-const app = express();
-const bodyParser = require("body-parser");
-const mongoose = require("mongoose");
+var express = require("express");
+var app = express();
+var bodyParser = require("body-parser");
+var mongoose = require("mongoose");
+var Location = require("./models/location");
+var Comment = require("./models/comment");
+// seedDB      = require("./seeds")
+require("./config/database");
 
-mongoose.connect("mongodb://localhost/nap_app");
 app.use(bodyParser.urlencoded({ extended: true }));
 app.set("view engine", "ejs");
-
-// SCHEMA SETUP
-const locationsSchema = new mongoose.Schema({
-  name: String,
-  image: String,
-  description: String
-});
-
-const Location = mongoose.model("Location", locationsSchema);
+app.use(express.static(__dirname + "/public"));
+// seedDB();
 
 app.get("/", function(req, res) {
   res.render("welcome");
@@ -26,7 +22,7 @@ app.get("/locations", function(req, res) {
     if (err) {
       console.log(err);
     } else {
-      res.render.apply("index", { locations: allLocations });
+      res.render("locations/index.ejs", { locations: allLocations });
     }
   });
 });
@@ -51,18 +47,53 @@ app.post("/locations", function(req, res) {
 
 //NEW
 app.get("/locations/new", function(req, res) {
-  res.render("new.ejs");
+  res.render("locations/new.ejs");
 });
 
 //SHOW - shows more info about a location
 app.get("/locations/:id", function(req, res) {
   //find the campground with provided ID
-  Location.findById(req.params.id, function(err, foundLocation) {
+  Location.findById(req.params.id)
+    .populate("comments")
+    .exec(function(err, foundLocation) {
+      if (err) {
+        console.log(err);
+      } else {
+        console.log(foundLocation);
+        //render show template with that campground
+        res.render("locations/show", { location: foundLocation });
+      }
+    });
+});
+
+/////////////////COMMENST
+app.get("/locations/:id/comments/new", function(req, res) {
+  // find location by id
+  Location.findById(req.params.id, function(err, location) {
     if (err) {
       console.log(err);
     } else {
-      //render show template with that campground
-      res.render("show", { location: foundLocation });
+      res.render("comments/new", { location: location });
+    }
+  });
+});
+
+app.post("/locations/:id/comments", function(req, res) {
+  //lookup campground using ID
+  Locations.findById(req.params.id, function(err, location) {
+    if (err) {
+      console.log(err);
+      res.redirect("/locations");
+    } else {
+      Comment.create(req.body.comment, function(err, comment) {
+        if (err) {
+          console.log(err);
+        } else {
+          location.comments.push(comment);
+          location.save();
+          res.redirect("/locations/" + locations._id);
+        }
+      });
     }
   });
 });
