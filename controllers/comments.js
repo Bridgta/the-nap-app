@@ -1,6 +1,6 @@
 var Location = require("../models/location");
-var Comment = require("../models/location");
-// var middleware = require("../middleware");
+var Comment = require("../models/comment");
+const middleware = require("../middleware");
 
 function newComment(req, res) {
   // find location by id

@@ -4,15 +4,21 @@ const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
 const passport = require("passport");
 const LocalStategy = require("passport-local");
+var methodOverride = require("method-override");
 const Location = require("./models/location");
 const User = require("./models/user");
 const Comment = require("./models/comment");
 // seedDB = require("./seeds");
 require("./config/database");
 
+const commentRoutes = require("./routes/comments");
+const locationRoutes = require("./routes/locations");
+const indexRoutes = require("./routes/index");
+
 app.use(bodyParser.urlencoded({ extended: true }));
 app.set("view engine", "ejs");
 app.use(express.static(__dirname + "/public"));
+app.use(methodOverride("_method"));
 // seedDB();
 
 //PAssport Config
@@ -35,61 +41,9 @@ app.use(function(req, res, next) {
   next();
 });
 
-// //Root Route
-// app.get("/", function(req, res) {
-//   res.render("welcome");
-// });
-
-/////////////////COMMENST
-
-////AUTHH RPUTES
-
-app.get("/signup", function(req, res) {
-  res.render("signup");
-});
-
-//handle sign in logic
-app.post("/signup", function(req, res) {
-  let newUser = new User({ username: req.body.username });
-  User.register(newUser, req.body.password, function(err, user) {
-    if (err) {
-      console.log(err);
-      return res.render("signup");
-    }
-    passport.authenticate("local")(req, res, function() {
-      res.redirect("/locations");
-    });
-  });
-});
-
-///log in form
-app.get("/login", function(req, res) {
-  res.render("login");
-});
-
-//handling login logic
-app.post(
-  "/login",
-  passport.authenticate("local", {
-    successRedirect: "/locations",
-    failureRedirect: "/login"
-  }),
-  function(req, res) {}
-);
-
-//logic route
-
-app.get("/logout", function(req, res) {
-  req.logout();
-  res.redirect("/locations");
-});
-
-function isLoggedIn(req, res, next) {
-  if (req.isAuthentcated()) {
-    return next();
-  }
-  res.redirect("/login");
-}
+app.use("/", indexRoutes);
+app.use("/locations", locationRoutes);
+app.use("/locations/:id/comments", commentRoutes);
 
 app.listen(3000, function() {
   console.log("The Nap App Server is Now Sleep Walking!");
