@@ -4,7 +4,7 @@ var bodyParser = require("body-parser");
 var mongoose = require("mongoose");
 var Location = require("./models/location");
 var Comment = require("./models/comment");
-// seedDB      = require("./seeds")
+// seedDB = require("./seeds");
 require("./config/database");
 
 app.use(bodyParser.urlencoded({ extended: true }));
