@@ -1,26 +1,31 @@
-var express = require("express");
-var app = express();
-var bodyParser = require("body-parser");
+const express = require("express");
+const app = express();
+const bodyParser = require("body-parser");
+const mongoose = require("mongoose");
 
+mongoose.connect("mongodb://localhost/nap_app");
 app.use(bodyParser.urlencoded({ extended: true }));
 app.set("view engine", "ejs");
 
-var locations = [
-  {
-    name: "The Library",
-    image:
-      "https://cdn.pixabay.com/photo/2015/09/04/23/04/library-922998__340.jpg"
-  }
-];
+// SCHEMA SETUP
+var locationsSchema = new mongoose.Schema({
+  name: String,
+  image: String,
+  description: String
+});
+
+const locations = mongoose.model("Location", locationSchema);
 
 app.get("/", function(req, res) {
   res.render("welcome");
 });
 
+//INDEX - show all locations
 app.get("/locations", function(req, res) {
   res.render("locations", { locations: locations });
 });
 
+//Create - create all locations
 app.post("/locations", function(req, res) {
   // get data from form and add to locations array
   var name = req.body.name;
