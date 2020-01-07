@@ -39,7 +39,7 @@ function seedDB() {
           Comment.create(
             {
               text: "This place is great, but I wish there were pillows",
-              author: "snoozeMcginity"
+              creator: "snoozeMcginity"
             },
             function(err, comment) {
               if (err) {

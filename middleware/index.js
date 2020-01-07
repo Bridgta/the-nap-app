@@ -10,7 +10,7 @@ middlewareObj.checkLocationAuth = function(req, res, next) {
         res.redirect("back");
       } else {
         // does user own the location?
-        if (foundLocation.author.id.equals(req.user._id)) {
+        if (foundLocation.creator.id.equals(req.user._id)) {
           next();
         } else {
           res.redirect("back");
@@ -29,7 +29,7 @@ middlewareObj.checkCommentAuth = function(req, res, next) {
         res.redirect("back");
       } else {
         // does user own the comment?
-        if (foundComment.author.id.equals(req.user._id)) {
+        if (foundComment.creator.id.equals(req.user._id)) {
           next();
         } else {
           res.redirect("back");

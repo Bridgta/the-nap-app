@@ -1,9 +1,16 @@
-var mongoose = require("mongoose");
+const mongoose = require("mongoose");
 
-var locationSchema = new mongoose.Schema({
+const locationSchema = new mongoose.Schema({
   name: String,
   image: String,
   description: String,
+  creator: {
+    id: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "User"
+    },
+    username: String
+  },
   comments: [
     {
       type: mongoose.Schema.Types.ObjectId,
