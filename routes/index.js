@@ -51,12 +51,4 @@ router.get("/logout", function(req, res) {
   res.redirect("/locations");
 });
 
-//middleware
-// function isLoggedIn(req, res, next) {
-//   if (req.isAuthentcated()) {
-//     return next();
-//   }
-//   res.redirect("/login");
-// }
-
 module.exports = router;

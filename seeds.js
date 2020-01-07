@@ -24,15 +24,13 @@ var data = [
 ];
 
 function seedDB() {
-  //Remove all campgrounds
   Location.remove({}, function(err) {
     if (err) {
       console.log(err);
     }
     console.log("removed nap locations!");
-    //add a few campgrounds
     data.forEach(function(seed) {
-      Location.create(seed, function(err, campground) {
+      Location.create(seed, function(err, location) {
         if (err) {
           console.log(err);
         } else {
