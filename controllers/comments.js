@@ -1,6 +1,6 @@
 var Location = require("../models/location");
 var Comment = require("../models/comment");
-const middleware = require("../middleware");
+var middleware = require("../middleware");
 
 function newComment(req, res) {
   // find location by id
@@ -23,6 +23,9 @@ function create(req, res) {
         if (err) {
           console.log(err);
         } else {
+          comment.creator.id = req.user._id;
+          comment.creator.username = req.user.username;
+          comment.save();
           location.comments.push(comment);
           location.save();
           res.redirect("/locations/" + location._id);

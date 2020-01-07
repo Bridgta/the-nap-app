@@ -1,5 +1,5 @@
-const Location = require("../models/location");
-const middleware = require("../middleware");
+var Location = require("../models/location");
+var middleware = require("../middleware");
 
 //INDEX - show all locations
 function index(req, res) {
@@ -16,11 +16,21 @@ function create(req, res) {
   var name = req.body.name;
   var image = req.body.image;
   var desc = req.body.description;
-  var newLocation = { name: name, image: image, description: desc };
+  var creator = {
+    id: req.user._id,
+    username: req.user.username
+  };
+  var newLocation = {
+    name: name,
+    image: image,
+    description: desc,
+    creator: creator
+  };
   Location.create(newLocation, function(err, newlyCreated) {
     if (err) {
       console.log(err);
     } else {
+      console.log(newlyCreated);
       res.redirect("/locations");
     }
   });
@@ -40,8 +50,7 @@ function show(req, res) {
         console.log(err);
       } else {
         console.log(foundLocation);
-
-        res.render("locations/show", { location: foundLocation });
+        res.render("locations/show.ejs", { location: foundLocation });
       }
     });
 }
@@ -53,7 +62,7 @@ function edit(req, res) {
 }
 
 function update(req, res) {
-  Location.findByIdAndUpdate(req.params.id, req.body.Location, function(
+  Location.findByIdAndUpdate(req.params.id, req.body.location, function(
     err,
     updatedLocation
   ) {

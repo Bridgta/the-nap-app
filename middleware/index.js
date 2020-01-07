@@ -1,12 +1,13 @@
-const Location = require("../models/location");
-const Comment = require("../models/comment");
+var Location = require("../models/location");
+var Comment = require("../models/comment");
 
-const middlewareObj = {};
+var middlewareObj = {};
 
-middlewareObj.checkLocationAuth = function(req, res, next) {
+middlewareObj.checkLocationOwnership = function(req, res, next) {
   if (req.isAuthenticated()) {
     Location.findById(req.params.id, function(err, foundLocation) {
       if (err) {
+        // req.flash("error", "location not found");
         res.redirect("back");
       } else {
         // does user own the location?
@@ -18,11 +19,12 @@ middlewareObj.checkLocationAuth = function(req, res, next) {
       }
     });
   } else {
+    // req.flash("error", "You need to be logged in to do that");
     res.redirect("back");
   }
 };
 
-middlewareObj.checkCommentAuth = function(req, res, next) {
+middlewareObj.checkCommentOwnership = function(req, res, next) {
   if (req.isAuthenticated()) {
     Comment.findById(req.params.comment_id, function(err, foundComment) {
       if (err) {
@@ -32,11 +34,13 @@ middlewareObj.checkCommentAuth = function(req, res, next) {
         if (foundComment.creator.id.equals(req.user._id)) {
           next();
         } else {
+          // req.flash("error", "You don't have permission to do that");
           res.redirect("back");
         }
       }
     });
   } else {
+    // req.flash("error", "You need to be logged in to do that");
     res.redirect("back");
   }
 };
@@ -45,6 +49,7 @@ middlewareObj.isLoggedIn = function(req, res, next) {
   if (req.isAuthenticated()) {
     return next();
   }
+  // req.flash("error", "You need to be logged in to do that");
   res.redirect("/login");
 };
 

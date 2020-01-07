@@ -23,39 +23,20 @@ var data = [
   }
 ];
 
-function seedDB() {
-  Location.remove({}, function(err) {
-    if (err) {
-      console.log(err);
-    }
-    console.log("removed nap locations!");
-    data.forEach(function(seed) {
-      Location.create(seed, function(err, location) {
-        if (err) {
-          console.log(err);
-        } else {
-          console.log("added a nap location");
-          //create a comment
-          Comment.create(
-            {
-              text: "This place is great, but I wish there were pillows",
-              creator: "snoozeMcginity"
-            },
-            function(err, comment) {
-              if (err) {
-                console.log(err);
-              } else {
-                location.comments.push(comment);
-                location.save();
-                console.log("Created new comment");
-              }
-            }
-          );
-        }
+async function seedDB() {
+  try {
+    await Comment.remove({});
+    await Location.remove({});
+    for (const data of data) {
+      let location = await Location.create(data);
+      let comment = await Comment.create({
+        text: "This place is great, but I wish there were pillows",
+        creator: "snoozeMcginity"
       });
-    });
-  });
-  //add a few comments
+      location.comments.push(comment);
+      location.save();
+    }
+  } catch (err) {}
 }
 
 module.exports = seedDB;

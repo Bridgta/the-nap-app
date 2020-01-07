@@ -1,15 +1,18 @@
 const express = require("express");
-const app = express();
+
 const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
 const passport = require("passport");
-const LocalStategy = require("passport-local");
-var methodOverride = require("method-override");
-const Location = require("./models/location");
-const User = require("./models/user");
-const Comment = require("./models/comment");
-// seedDB = require("./seeds");
+const LocalStrategy = require("passport-local");
+const methodOverride = require("method-override");
+var Location = require("./models/location");
+var Comment = require("./models/comment");
+var User = require("./models/user");
+
+// const seedDB = require("./seeds");
 require("./config/database");
+
+const app = express();
 
 const commentRoutes = require("./routes/comments");
 const locationRoutes = require("./routes/locations");
@@ -33,9 +36,10 @@ app.use(
 
 app.use(passport.initialize());
 app.use(passport.session());
-passport.use(new LocalStategy(User.authenticate()));
+passport.use(new LocalStrategy(User.authenticate()));
 passport.serializeUser(User.serializeUser());
 passport.deserializeUser(User.deserializeUser());
+
 app.use(function(req, res, next) {
   res.locals.currentUser = req.user;
   next();
