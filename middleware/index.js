@@ -3,7 +3,7 @@ const Comment = require("../models/comment");
 
 const middlewareObj = {};
 
-middlewareObj.checkLocationOwnership = function(req, res, next) {
+middlewareObj.checkLocationAuth = function(req, res, next) {
   if (req.isAuthenticated()) {
     Location.findById(req.params.id, function(err, foundLocation) {
       if (err) {
@@ -22,7 +22,7 @@ middlewareObj.checkLocationOwnership = function(req, res, next) {
   }
 };
 
-middlewareObj.checkCommentOwnership = function(req, res, next) {
+middlewareObj.checkCommentAuth = function(req, res, next) {
   if (req.isAuthenticated()) {
     Comment.findById(req.params.comment_id, function(err, foundComment) {
       if (err) {

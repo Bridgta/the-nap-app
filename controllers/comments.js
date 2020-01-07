@@ -32,7 +32,47 @@ function create(req, res) {
   });
 }
 
+function edit(req, res) {
+  Comment.findById(req.params.comment_id, function(err, foundComment) {
+    if (err) {
+      res.redirect("back");
+    } else {
+      res.render("comments/edit", {
+        location_id: req.params.id,
+        comment: foundComment
+      });
+    }
+  });
+}
+
+function update(req, res) {
+  Comment.findByIdAndUpdate(req.params.comment_id, req.body.comment, function(
+    err,
+    updatedComment
+  ) {
+    if (err) {
+      res.redirect("back");
+    } else {
+      res.redirect("/locations/" + req.params.id);
+    }
+  });
+}
+
+function deleteComment(req, res) {
+  //findByIdAndRemove
+  Comment.findByIdAndRemove(req.params.comment_id, function(err) {
+    if (err) {
+      res.redirect("back");
+    } else {
+      res.redirect("/locations/" + req.params.id);
+    }
+  });
+}
+
 module.exports = {
   new: newComment,
-  create
+  create,
+  edit,
+  update,
+  delete: deleteComment
 };
