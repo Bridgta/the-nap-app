@@ -1,5 +1,6 @@
 const express = require("express");
-
+var cookieParser = require("cookie-parser");
+// var logger = require("morgan");
 const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
 const passport = require("passport");
@@ -8,11 +9,12 @@ const methodOverride = require("method-override");
 var Location = require("./models/location");
 var Comment = require("./models/comment");
 var User = require("./models/user");
-
+require("dotenv").config();
 // const seedDB = require("./seeds");
 require("./config/database");
 
 const app = express();
+app.use(cookieParser());
 
 const commentRoutes = require("./routes/comments");
 const locationRoutes = require("./routes/locations");
@@ -28,7 +30,7 @@ app.use(methodOverride("_method"));
 
 app.use(
   require("express-session")({
-    secret: "Vanilla is better than chocolate",
+    secret: process.env.SESSION_SECRET,
     resave: false,
     saveUninitialized: false
   })

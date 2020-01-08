@@ -7,11 +7,11 @@ body {
 }
 
 .header {
-  height: 100vh;
+  height: 80vh;
   background-image: linear-gradient(
       to right bottom,
-      rgba(76, 216, 255, 0.8),
-      rgba(30, 108, 217, 0.8)
+      rgba(76, 216, 255, 0.7),
+      rgba(30, 108, 217, 0.7)
     ),
     url("https://images.unsplash.com/photo-1554188572-9d184b57d8e2?ixlib=rb-1.2.1&ixid=eyJhcHBfaWQiOjEyMDd9&auto=format&fit=crop&w=1334&q=80");
 
@@ -64,7 +64,7 @@ body {
 
 .btn:link,
 .btn:visited {
-  text-transform: uppercase;
+  /* text-transform: uppercase; */
   text-decoration: none;
   padding: 10px 20px;
   display: inline-block;
@@ -85,7 +85,7 @@ body {
 
 .btn-white {
   background-color: #fff;
-  color: #777;
+  color: rgb(33, 104, 170)167, 153, 153);
   font-size: 14px;
 }
 

@@ -33,6 +33,15 @@
           >
             <a href="/locations" class="nav-link">Home</a>
           </li>
+          <li
+            class="nav-item <%= typeof page !== 'undefined' && page === 'locations' ? 'active' : '' %>"
+          >
+            <a
+              href="https://www.mentalfloss.com/article/502902/8-scientific-benefits-napping"
+              class="nav-link"
+              >Nap Science</a
+            >
+          </li>
         </ul>
         <ul class="navbar-nav">
           <% if(!currentUser){ %>
@@ -61,19 +70,12 @@
     </nav>
     <div class="container">
       <header class="header">
-        <div class="brand-box">
-          <a
-            href="https://www.mentalfloss.com/article/502902/8-scientific-benefits-napping"
-            class="btn btn-white btn-animated"
-            >The Science of Napping</a
-          >
-        </div>
-
         <div class="text-box">
           <h1 class="heading-primary">
             <span class="heading-primary-main"
               >It's hard to do your best work when you're tired</span
             >
+            <br />
             <span class="heading-primary-sub">Discover spots to rest</span>
           </h1>
           <a href="/locations/new" class="btn btn-white btn-animated"
