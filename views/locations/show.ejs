@@ -12,7 +12,7 @@
           <h4><a><%= location.name %></a></h4>
           <p><%= location.description %></p>
           <p>
-            <em> Submitted By <%= location.creator.username %> </em>
+            <em> Nap Scout: <%= location.creator.username %> </em>
           </p>
 
           <% if(currentUser && location.creator.id.equals(currentUser._id)) { %>
