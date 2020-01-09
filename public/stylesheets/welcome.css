@@ -60,6 +60,33 @@ display-3-text {
 }
 
 .display-3-text {
-  font-size: 4.5rem;
+  font-size: 4.7rem;
   font-family: "Lobster", cursive;
+}
+.btn:link,
+.btn:visited {
+  /* text-transform: uppercase; */
+  text-decoration: none;
+  padding: 10px 20px;
+  display: inline-block;
+  border-radius: 100px;
+  transition: all 0.2s;
+  position: relative;
+  font-family: 'Hind Vadodara', sans-serif;
+}
+
+.btn:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+}
+
+.btn:active {
+  transform: translateY(-1px);
+  box-shadow: 0 5px 10px rgba(0, 0, 0, 0.2);
+}
+
+.btn-white {
+  background-color: whitesmoke;
+  color: rgb(71, 141, 207)167, 153, 153);
+  font-size: 16px;
 }

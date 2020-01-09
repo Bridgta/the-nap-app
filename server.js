@@ -1,6 +1,8 @@
+var createError = require("http-errors");
 const express = require("express");
+var path = require("path");
 var cookieParser = require("cookie-parser");
-// var logger = require("morgan");
+var logger = require("morgan");
 const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
 const passport = require("passport");
@@ -11,18 +13,22 @@ var Comment = require("./models/comment");
 var User = require("./models/user");
 require("dotenv").config();
 // const seedDB = require("./seeds");
-require("./config/database");
-
-const app = express();
-app.use(cookieParser());
 
 const commentRoutes = require("./routes/comments");
 const locationRoutes = require("./routes/locations");
 const indexRoutes = require("./routes/index");
+require("./config/database");
 
-app.use(bodyParser.urlencoded({ extended: true }));
+const app = express();
+
+//view engine set up
+app.use(express.static(path.join(__dirname, "public")));
+app.set("views", path.join(__dirname, "views"));
 app.set("view engine", "ejs");
-app.use(express.static(__dirname + "/public"));
+app.use(bodyParser.urlencoded({ extended: true }));
+app.use(cookieParser());
+app.use(logger("dev"));
+app.use(express.json());
 app.use(methodOverride("_method"));
 // seedDB();
 
@@ -51,6 +57,24 @@ app.use("/", indexRoutes);
 app.use("/locations", locationRoutes);
 app.use("/locations/:id/comments", commentRoutes);
 
-app.listen(3000, function() {
-  console.log("The Nap App Server is Now Sleep Walking!");
+// catch 404 and forward to error handler
+app.use(function(req, res, next) {
+  next(createError(404));
 });
+
+// error handler
+app.use(function(err, req, res, next) {
+  // set locals, only providing error in development
+  res.locals.message = err.message;
+  res.locals.error = req.app.get("env") === "development" ? err : {};
+
+  // render the error page
+  res.status(err.status || 500);
+  res.render("error");
+});
+
+app.listen(process.env.PORT, function() {
+  console.log(`Listening on ${process.env.PORT}`);
+});
+
+module.exports = app;

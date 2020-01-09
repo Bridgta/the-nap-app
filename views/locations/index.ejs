@@ -14,7 +14,7 @@
 
   <body>
     <nav class="navbar navbar-expand-md navbar-light bg-light sticky-top">
-      <a class="navbar-brand" href="/">Zz!</a>
+      <a class="navbar-brand" href="/"></a>
       <button
         class="navbar-toggler"
         type="button"
@@ -31,7 +31,7 @@
           <li
             class="nav-item <%= typeof page !== 'undefined' && page === 'locations' ? 'active' : '' %>"
           >
-            <a href="/locations" class="nav-link">Home</a>
+            <a href="/" class="nav-link">Home</a>
           </li>
           <li
             class="nav-item <%= typeof page !== 'undefined' && page === 'locations' ? 'active' : '' %>"
@@ -83,20 +83,36 @@
           >
         </div>
       </header>
+      <br />
+    </div>
+    <div class="skew-c"></div>
+    <div class="colour-block"></div>
+    <div class="skew-cc"></div>
+    <div class="white-block">
+      <h1></h1>
+      <p>
+        Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Aenean commodo
+        ligula eget dolor. Aenean massa. Cum sociis natoque penatibus et magnis
+        dis parturient montes, nascetur ridiculus mus. Donec quam felis,
+        ultricies nec, pellentesque eu, pretium quis, sem. Nulla consequat massa
+        quis enim.
+      </p>
+    </div>
+    <div class="skew-c"></div>
+    <div class="colour-block">
+      <h1></h1>
     </div>
     <br />
-    <hr />
-    <br />
-    <div class="row text-center" style="display:flex; flex-wrap: wrap;">
+    <div class="row text-center flex-wrap" id="location-grid">
       <% locations.forEach(function(location){ %>
       <div class="col-md-3 col-sm-6">
-        <div class="thumbnail">
+        <div id="locThumb" class="thumbnail">
           <img src="<%= location.image %>" />
           <div class="caption">
             <h4><%= location.name %></h4>
           </div>
           <p>
-            <a href="/locations/<%= location._id %>" class="btn btn-dark"
+            <a href="/locations/<%= location._id %>" class="btn btn-primary"
               >More Info</a
             >
           </p>
