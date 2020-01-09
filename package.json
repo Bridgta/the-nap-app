@@ -2,7 +2,6 @@
   "name": "nap-app",
   "version": "1.0.0",
   "description": "An app for naps",
-  "main": "server.js",
   "scripts": {
     "start": "node ./bin/www"
   },
