@@ -1,7 +1,7 @@
 const Like = require("../../models/location");
 
 const likes = (req, res) => {
-  Like.find({}, (err, likes) => {
+  Like.find({ likes }, (err, likes) => {
     res.status(200).json(likes);
   });
 };

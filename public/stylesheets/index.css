@@ -1,9 +1,15 @@
+html {
+  height: 100%;
+  width: 100%;
+}
+
 body {
   font-family: "Lato", sans-serif;
   font-weight: 400;
   font-size: 16px;
   line-height: 1.7;
   color: black ;
+  
 }
 
 .header {
@@ -108,53 +114,22 @@ body {
   padding: 9px;
 }
 
-/* werid thing */
+/* divider */
 
-body {
-  margin:0px;
-}
-
-.white-block {
-  background:#fff;
-  width:60%;
-  padding:7% 20% 10% 20%;
-  color:linear-gradient(
-    to right bottom,
-    rgba(76, 216, 255, 0.7),
-    rgba(30, 108, 217, 0.7)
+.jumbotron { 
+  background-image: linear-gradient(
+    to right,
+    #a1c4fd 0%,
+    #c2e9fb 51%,
+    #a1c4fd 100%
   );
 }
-h1 {
-  text-align:center;
-  font-size:80px;
-  font-family:'wire one', serif;
-  font-weight:normal;
-}
-p {
-  font-size:20px;
-  font-family:'Raleway', serif;
+
+
+.jumbotron { 
+  padding: .7rem; 
+  border-radius: .1; 
+  
 }
 
 
-/*------------------*/
-/*  SKEW CLOCKWISE  */
-/*------------------*/
-.skew-cc{
-  width:100%;
-  height:100px;
-  position:absolute;
-  left:0px;
-  background: linear-gradient(to right bottom, rgba(76, 216, 255, 0.7) 49%, #fff 50%),    linear-gradient(-50deg, #ffffff 16px, #000 0);
-}
-
-
-/*-------------------------*/
-/* SKEW COUNTER CLOCKWISE  */
-/*-------------------------*/
-.skew-c{
-  width:100%;
-  height:100px;
-  position:absolute;
-  left:0px;
-  background: linear-gradient(to left bottom, #fff 49%, rgba(76, 216, 255, 0.7) 50%);
-}

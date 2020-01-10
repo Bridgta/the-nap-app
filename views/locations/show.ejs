@@ -3,6 +3,12 @@
   <head>
     <title>NapApp</title>
     <link href="https://fonts.googleapis.com/css?family=Bentham|Playfair+Display|Raleway:400,500|Suranna|Trocchi" rel="stylesheet">
+    <link
+      rel="stylesheet"
+      href="https://use.fontawesome.com/releases/v5.6.1/css/all.css"
+      integrity="sha384-gfdkjb5BdAXd+lj+gudLWI+BXq4IuLW5IT+brZEZsLFm++aCMlF1V92rMkPaX4PP"
+      crossorigin="anonymous"
+    />
 </head>
 
     <link rel="stylesheet" href="/stylesheets/show.css" />
@@ -19,6 +25,7 @@
           
           <h2>Nap Scout: <%= location.creator.username %></h2>
           <h2><%= location.description %></h2>
+          <H2><i class="fa fa-star" aria-hidden="true"><a><%= location.likes %></a></i></H2>
           <% if(currentUser && location.creator.id.equals(currentUser._id)) {
             %>
             <a
@@ -49,14 +56,14 @@
       </div>
     </div>
     
-    <div class="container">
+    <div class="wrapper">
+      <div class="card-info">
+        <div class="card-text">
       <div>
         <% location.comments.forEach(function(comment){ %>
-        <h2><%= comment.creator.username %></h2>
+        <h1><%= comment.creator.username %></h1>
           <br>
-        <%= comment.text %>
-        </p>
-        <hr>
+        <h2> <%= comment.text %></h2>
         <% if(currentUser && comment.creator.id.equals(currentUser._id)){
           %>
           <a href="/locations/<%=location._id %>/comments/<%=comment._id %>/edit" >Edit</a>
@@ -67,7 +74,8 @@
           </div>
         </div>
       <% }) %>
-  </body>
+    </div>
+    </div>
   </html>
 
   
