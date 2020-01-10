@@ -1,82 +1,79 @@
-<%- include ("../partials/header") %>
-<body>
-  <div class="container">
-    <div class="row">
-      <div class="col-md-9">
-        <div class="thumbnail">
-          <img class="img-responsive" src="<%= location.image %>" />
-          <div class="caption-full">
-            <h4><a><%= location.name %></a></h4>
-            <p><%= location.description %></p>
-            <p>
-              <em> Nap Scout: <%= location.creator.username %> </em>
-            </p>
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>NapApp</title>
+    <link href="https://fonts.googleapis.com/css?family=Bentham|Playfair+Display|Raleway:400,500|Suranna|Trocchi" rel="stylesheet">
+</head>
 
-            <button>
-              <i class="fa fa-star" aria-hidden="true"><%= location.likes %></i>
-            </button>
-
-            <% if(currentUser && location.creator.id.equals(currentUser._id)) {
+    <link rel="stylesheet" href="/stylesheets/show.css" />
+  </head>
+  
+  <body>
+    <div class="wrapper">
+      <div class="card-img">
+        <img src="<%= location.image %>" height="470" width="400">
+      </div>
+      <div class="card-info">
+        <div class="card-text">
+          <h1><%= location.name %></h1>
+          
+          <h2>Nap Scout: <%= location.creator.username %></h2>
+          <h2><%= location.description %></h2>
+          <% if(currentUser && location.creator.id.equals(currentUser._id)) {
             %>
             <a
-              class="btn btn-warning"
-              href="/locations/<%= location._id %>/edit"
-              >Edit</a
-            >
-            <form
-              id="delete-form"
-              action="/locations/<%= location._id %>?_method=DELETE"
-              method="post"
-            >
-              <button class="btn btn-danger" type="submit">Delete</button>
-            </form>
-            <% } %>
-          </div>
+            class="card-price-btn"
+            href="/locations/<%= location._id %>/edit"
+            >Edit</a
+          >
+          <form
+          id="delete-form"
+          action="/locations/<%= location._id %>?_method=DELETE"
+          method="post"
+        >
+          <button type="submit">Delete</button>
+        </form>
+        <% } %>
+
         </div>
-
-        <div class="well">
-          <div class="text-right">
-            <a
-              class="btn btn-success"
-              href="/locations/<%= location._id %>/comments/new"
-              >Add New Comment</a
-            >
-          </div>
-          <hr />
-          <% location.comments.forEach(function(comment){ %>
-          <div class="row">
-            <div class="col-md-12">
-              <strong><%= comment.creator.username %></strong>
-              <span class="pull-right">DATW</span>
-              <p>
-                <%= comment.text %>
-              </p>
-              <% if(currentUser && comment.creator.id.equals(currentUser._id)){
-              %>
-              <a
-                class="btn btn-xs btn-warning"
-                href="/locations/<%=location._id %>/comments/<%=comment._id %>/edit"
-                >Edit</a
-              >
-              <form
-                id="delete-form"
-                action="/locations/<%=location._id %>/comments/<%=comment._id %>?_method=DELETE"
-                method="POST"
-              >
-                <input
-                  type="submit"
-                  class="btn btn-xs btn-danger"
-                  value="Delete"
-                />
-              </form>
-              <% } %>
-            </div>
-          </div>
-
-          <% }) %>
+        <div class="card-price-btn">
+          
+          <button type="button"> <a
+            href="/locations/<%= location._id %>/comments/new"
+            >Add New Comment</a
+          ></button>
+          
+          
+          
         </div>
       </div>
     </div>
-  </div>
-</body>
-<%- include ("../partials/footer") %>
+    
+    <div class="container">
+      <div>
+        <% location.comments.forEach(function(comment){ %>
+        <h2><%= comment.creator.username %></h2>
+          <br>
+        <%= comment.text %>
+        </p>
+        <hr>
+        <% if(currentUser && comment.creator.id.equals(currentUser._id)){
+          %>
+          <a href="/locations/<%=location._id %>/comments/<%=comment._id %>/edit" >Edit</a>
+              <form id="delete-form" action="/locations/<%=location._id %>/comments/<%=comment._id %>?_method=DELETE" method="POST">
+                <input type="submit" value="Delete"/>
+              </form>
+            <% } %>
+          </div>
+        </div>
+      <% }) %>
+  </body>
+  </html>
+
+  
+
+  <%- include ("../partials/footer") %>
+
+
+
+
