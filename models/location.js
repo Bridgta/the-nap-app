@@ -11,6 +11,7 @@ const locationSchema = new mongoose.Schema({
     },
     username: String
   },
+  likes: Number,
   comments: [
     {
       type: mongoose.Schema.Types.ObjectId,

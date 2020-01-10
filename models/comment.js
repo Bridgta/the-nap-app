@@ -8,7 +8,8 @@ const commentSchema = mongoose.Schema({
       ref: "User"
     },
     username: String
-  }
+  },
+  timestamps: { type: [String], index: true }
 });
 
 module.exports = mongoose.model("Comment", commentSchema);
