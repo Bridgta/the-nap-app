@@ -3,7 +3,7 @@
 
 ## Are you a student? Do you commute? Or somedays do you just really need to put your head down for a new minutes? With the Nap App, users can discover and build a community sharing local, free, and safe places where they've been able to take a quick nap. 
 
-[Here it is live:](https://aqueous-hollows-40089.herokuapp.com/ "The Nap App")
+# [Check it out](https://aqueous-hollows-40089.herokuapp.com/ "The Nap App")
 
 ---
 
