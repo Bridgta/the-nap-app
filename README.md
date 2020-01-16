@@ -10,16 +10,19 @@
 ## Product Shots 
 
 <br> View of one of the landing page. 
-![landing-page](https://imgur.com/TBdgV8a "landing-page")
+
+[Landing page](https://i.imgur.com/TBdgV8a.png)
+
 
 <br> View of the main page. 
-![main-page](https://imgur.com/2gIY5Or "main-page")
+[Main Page](https://i.imgur.com/2gIY5Or.png)
 
 <br> View of one of the sign-in. 
-![sign-in](https://imgur.com/oVTL4Gr "sign-in")
+[Sign In](https://i.imgur.com/oVTL4Gr.png)
 
 <br> View of one of the posted nap spot. 
-![nap-spot](https://imgur.com/8YV6N1t "nap-spot")
+[View](https://i.imgur.com/8YV6N1t.png)
+
 
 ---
 
