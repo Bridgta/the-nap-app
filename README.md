@@ -10,10 +10,10 @@
 ## Product Shots 
 
 <br> View of one of the landing page. 
-![landing-page](https://imgur.com/2gIY5Or "landing-page")
+![landing-page](https://imgur.com/TBdgV8a "landing-page")
 
 <br> View of the main page. 
-![main-page](https://imgur.com/TBdgV8a "main-page")
+![main-page](https://imgur.com/2gIY5Or "main-page")
 
 <br> View of one of the sign-in. 
 ![sign-in](https://imgur.com/oVTL4Gr "sign-in")
